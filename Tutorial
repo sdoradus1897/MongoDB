@@ -1,0 +1,93 @@
+MongoDB
+
+Tutorial
+
+
+DOCUMENT:
+
+# Each record in MongoDB is called a "Document".
+# A document is collection of field value pairs.
+# The value of the field includes arrays, documents or array of
+  documents
+  
+--------------------------------------------------------------------
+//Example of a document
+{
+	name: "sue",    //Fields: Value
+	age: 26,
+	status: "A",
+	groups: ["news", "sports"]
+}
+---------------------------------------------------------------------	
+  
+COLLECTIONS:
+
+# Documents (thats is each records) are stored in "Collections".
+
+REPLICA SET:
+
+# Group of MongoDB servers that maintains the same data set is 
+  called "Replica Set". Hence, the data availiability is increased.
+  
+ADVANTAGES:
+
+# In SQL, for each record in a particular table, the fields are
+  fixed but in case of MongoDB, each documents in a particular
+  collection can have different fields.
+
+EMBEDDED DATA MODEL:
+
+# All related data can be embedded within that particular document
+# Denormalised data model
+
+---------------------------------------------------------------------
+{
+	_id: <ObjectID1>,
+	username: "123xyz",
+	contact: {
+				phone: "123-456-7890",  //embedded sub-document
+				email: "xyz@email.com"
+			 }
+	access: {
+				level: 5,               //embedded sub-document
+				group: "dev"
+			}
+}
+----------------------------------------------------------------------
+
+# Generally such data model are very easy to read and can be 
+  retrieved faster. When we are storing the related data in 
+  different documents then many queries have to be passed to 
+  obtain the result.
+# This model is preferred for one to one and one to many mappings.
+
+REFERENCES:
+
+# Sometime we need to store the related data in different documents
+  if the application we develop demands
+# These are normalised data models.
+
+----------------------------------------------------------------------
+//user document
+{
+	_id: <ObjectID1>,
+	username: "123xyz"
+}
+//contact document
+{
+	_id: <ObjectID2>,
+	user_id: <ObjectID1>,
+	phone: "123-456-7890",
+	email: "xyz@email.com"
+}
+//access document
+{
+	_id: <Object<ID3>,
+	user_id: <ObjectID1>,
+	level: 5,
+	group: "dev",
+}
+//If we observe here though the _id of each document differ, 
+//everything is linked. The contact document and the access document
+//is linked to the user document by the reference user_id.
+----------------------------------------------------------------------
